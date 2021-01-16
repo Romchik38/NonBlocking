@@ -11,18 +11,17 @@ const logger = setInterval(() => {
     console.log(data);
     k++;
   });
-}, 10);
+}, 2);
 
 const getRand = () => Math.floor(Math.random() * 100);
 const arr = new Array(1000).fill(0).map(getRand);
 
-
 const cb = (err, data) => {
-  console.log({ err, data });
+  console.log({ data });
   console.log({ k });
   clearInterval(logger);
   console.log(new Date() - start);
 };
 
-nonBlock(arr.slice(), cb, 'middle');
-nonBlock(arr.slice(), cb, 'one');
+nonBlock(arr.slice(), cb, () => true);
+//nonBlock(arr.slice(), cb, numb => numb > 18 && numb < 50);
